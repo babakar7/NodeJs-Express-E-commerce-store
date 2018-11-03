@@ -1,0 +1,21 @@
+extends ../layouts/main-layout.pug
+
+block styles
+    link(rel="stylesheet", href="/assets/main.css")
+    link(rel="stylesheet", href="/assets/add.css")
+
+
+block content
+  main
+    if prods.length > 0
+        .grid-cart
+            each product in prods
+              li.cart_item(style="list-style:none")
+                h1  #{product.title}
+                h2  Qty: #{product.cartItem.quantity}
+                form(action="cart/delete", method="POST")
+                  input(type="hidden", value=`${product.id}`, name="id")
+                  button(type="submit").btn.btn-danger Delete
+
+    else
+      h1 No products in Cart
